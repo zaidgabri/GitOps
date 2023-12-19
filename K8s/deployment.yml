@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: algabrizaid/mysql-springboot-azure:latest-7
+        image: algabrizaid/mysql-springboot-azure:latest-12
         ports:
         - containerPort: 8080
