@@ -94,7 +94,7 @@ spec:
         image: mysql:8.0
         env:
           - name: MYSQL_ROOT_PASSWORD
-            value: zaidGabri@11
+            value: zaid@11
           - name: MYSQL_DATABASE
             value: gitops
 ---
