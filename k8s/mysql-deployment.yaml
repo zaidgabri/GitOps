@@ -33,7 +33,7 @@ spec:
           image: mysql:8.0
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: ENSA2023
+              value: zaidGabri@11
           ports:
             - containerPort: 3306
               name: mysql
@@ -58,10 +58,8 @@ metadata:
   name: mysql-initdb-cm
 data:
   init.sql: |
-    CREATE DATABASE IF NOT EXISTS doctordb;
-    CREATE DATABASE IF NOT EXISTS consultationdb;
-    CREATE DATABASE IF NOT EXISTS patientdb;
-
+    CREATE DATABASE IF NOT EXISTS gitops;
+  
 
 ---
 apiVersion: v1
