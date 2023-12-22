@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: ConfigServer-app-app
-          image: algabrizaid/configserver:latest
+          image: algabrizaid/serviceregistry:latest-1
           imagePullPolicy: Always
           ports:
             - containerPort: 8761
