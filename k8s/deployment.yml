@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-boot-app
-  namespace: mciroservice-project
+  namespace: microsvc-pro
   labels:
     app: spring-boot-app
 spec:
@@ -40,7 +40,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: spring-boot-app-service
-  namespace: mciroservice-project
+  namespace: microsvc-pro
 spec:
   type: LoadBalancer 
   selector:
