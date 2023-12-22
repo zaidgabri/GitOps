@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-boot-app
-  namespace: mciroservice-project
+  namespace: microservice-project
   labels:
     app: spring-boot-app
 spec:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: algabrizaid/mysql-springboot-azure:latest-15
+        image: algabrizaid/mysql-springboot-azure:latest-20
         ports:
         - containerPort: 8080
 ---
@@ -25,15 +25,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: spring-boot-app-service
-  namespace: mciroservice-project
+  namespace: microservice-project
 spec:
   type: LoadBalancer 
   ports:
   - name: http
     port: 80
-    targetPort: 8080
+    targetPort: 8080  # Update this line to match your containerPort
     protocol: TCP
-
-
-
-
