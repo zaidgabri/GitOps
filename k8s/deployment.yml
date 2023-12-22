@@ -20,7 +20,7 @@ spec:
         image: algabrizaid/mysql-springboot-azure:latest-20
         imagePullPolicy: Always
         ports:
-        - containerPort: 8080
+        - containerPort: 8081
         resources:  
           limits:
             cpu: 500m  
@@ -41,5 +41,5 @@ spec:
   ports:
   - name: http
     port: 80
-    targetPort: 8080
+    targetPort: 8081
     protocol: TCP
