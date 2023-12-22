@@ -16,14 +16,8 @@ spec:
         app: spring-boot-app
     spec:
       containers:
-<<<<<<< HEAD
-<<<<<<< HEAD
-      - name: spring-boot-app
-        image: algabrizaid/mysql-springboot-azure:latest-13
-=======
       - name: spring-boot-app
         image: algabrizaid/mysql-springboot-azure:latest-15
->>>>>>> cb69521dfe91b02ef31b69a550d038152de233ab
         ports:
         - containerPort: 8080
 ---
@@ -39,73 +33,7 @@ spec:
     port: 80
     targetPort: 8080
     protocol: TCP
-<<<<<<< HEAD
-  selector:
-    app: spring-boot-app
-=======
-       —name: nginx
-          image: nginx
-          ports:
-           —containerPort: 80
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 5
-            periodSeconds: 5
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: spring-boot-app
-#   namespace: mciroservice-project
-#   labels:
-#     app: spring-boot-app
-# spec:
-#   replicas: 2
-#   selector:
-#     matchLabels:
-#       app: spring-boot-app
-#   template:
-#     metadata:
-#       labels:
-#         app: spring-boot-app
-#     spec:
-#       containers:
-#       - name: spring-boot-app
-#         image: algabrizaid/mysql-springboot-azure:latest-15
-#         ports:
-#         - containerPort: 8080
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: spring-boot-app-service
-#   namespace: mciroservice-project
-# spec:
-#   type: LoadBalancer 
-#   ports:
-#   - name: http
-#     port: 80
-#     targetPort: 8080
-#     protocol: TCP
-=======
->>>>>>> cb69521dfe91b02ef31b69a550d038152de233ab
-#   selector:
-#     app: spring-boot-app
-
-
->>>>>>> f3335c6c030297f04b1685afd2891629ec499a7f
