@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-registry-app
+  namespace: ai-project 
+spec:
+  replicas: 2  
+  selector:
+    matchLabels:
+      app: service-registry-app
+  template:
+    metadata:
+      labels:
+        app: service-registry-app
+    spec:
+      containers:
+        - name: service-registry-app
+          image: sk09devops/serviceregistry:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8761
+          resources:   
+            limits:
+              cpu: 500m   
+              memory: 512Mi  
+            requests:
+              cpu: 200m   
+              memory: 256Mi   
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-registry-app-svc
+  namespace: ai-project
+spec:
+  selector:
+    app: service-registry-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8761
+  type: ClusterIP 
