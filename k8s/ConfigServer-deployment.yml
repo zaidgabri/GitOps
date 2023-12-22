@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ConfigServer-app
+  namespace: microsvc-pro
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ConfigServer-app-app
+  template:
+    metadata:
+      labels:
+        app: ConfigServer-app-app
+    spec:
+      containers:
+        - name: ConfigServer-app-app
+          image: algabrizaid/configserver:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8761
+          resources:   
+            limits:
+              cpu: 500m   
+              memory: 512Mi  
+            requests:
+              cpu: 200m   
+              memory: 256Mi   
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ConfigServer-app-app-svc
+  namespace: microsvc-pro
+spec:
+  selector:
+    app: service-registry-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8761
+  type: NodePort 
