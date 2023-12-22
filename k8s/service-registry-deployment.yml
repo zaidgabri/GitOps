@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: service-registry-app
-          image: sk09devops/serviceregistry:latest-
+          image: sk09devops/serviceregistry:latest-16
           imagePullPolicy: Always
           ports:
             - containerPort: 8761
