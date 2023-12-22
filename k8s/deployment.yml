@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: algabrizaid/mysql-springboot-azure:latest-33
+        image: algabrizaid/mysql-springboot-azure:latest-34
         imagePullPolicy: Always
         ports:
         - containerPort: 8081
