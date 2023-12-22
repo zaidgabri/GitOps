@@ -94,9 +94,10 @@ spec:
         image: mysql:8.0
         env:
           - name: MYSQL_ROOT_PASSWORD
-            value: zaid@11
+            value: zaidGabri@11
           - name: MYSQL_DATABASE
             value: gitops
+  
 ---
 apiVersion: v1
 kind: Service
