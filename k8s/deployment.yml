@@ -18,8 +18,16 @@ spec:
       containers:
       - name: spring-boot-app
         image: algabrizaid/mysql-springboot-azure:latest-20
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
+        resources:  
+          limits:
+            cpu: 500m  
+            memory: 512Mi  
+          requests:
+            cpu: 200m   
+            memory: 256Mi
 ---
 apiVersion: v1
 kind: Service
@@ -28,8 +36,10 @@ metadata:
   namespace: microservice-project
 spec:
   type: LoadBalancer 
+  selector:
+    app: spring-boot-app
   ports:
   - name: http
     port: 80
-    targetPort: 8080  # Update this line to match your containerPort
+    targetPort: 8080
     protocol: TCP
