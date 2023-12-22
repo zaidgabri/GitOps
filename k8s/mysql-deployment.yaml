@@ -94,10 +94,19 @@ spec:
         image: mysql:8.0
         env:
           - name: MYSQL_ROOT_PASSWORD
-            value: zaidGabri@11
-          - name: MYSQL_DATABASE
-            value: gitops
-  
+            value: zaid@11
+          # - name: MYSQL_DATABASE
+          #   value: gitops
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-initdb-cm
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS gitops;  
 ---
 apiVersion: v1
 kind: Service
