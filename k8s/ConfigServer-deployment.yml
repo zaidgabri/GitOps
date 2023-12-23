@@ -4,7 +4,7 @@ metadata:
   name: config-server-app
   namespace: microsvc-pro
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: config-server-app
