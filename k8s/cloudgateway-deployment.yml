@@ -1,29 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: config-server-app
+  name: cloudgateway-app
   namespace: microsvc-pro
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: config-server-app
+      app: cloudgateway-app
   template:
     metadata:
       labels:
-        app: config-server-app
+        app: cloudgateway-app
     spec:
       containers:
-        - name: config-server-app
-          image: algabrizaid/configserver:latest-1
+        - name: cloudgateway-app
+          image: algabrizaid/cloudgateway:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 9296
+            - containerPort: 9090
           env:
-            - name: EUREKA_SERVER_ADDRESS
+            - name: config_server_url
               valueFrom:
                 configMapKeyRef:
-                  name: eureka
+                  name: cloudgateway
                   key: hostname
           resources:   
             limits:
@@ -38,23 +38,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: config-server-app-svc
+  name: cloudgateway-app-svc
   namespace: microsvc-pro
 spec:
   selector:
-    app: config-server-app
+    app: cloudgateway-app
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 9296
-  type: NodePort
+      targetPort: 9090
+  type: LoadBalancer
 
-
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: cloudgateway
-  namespace: microsvc-pro
-data:
-  hostname: "config-server-app-svc"

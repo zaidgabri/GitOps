@@ -1,52 +1,52 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: spring-boot-app
-  namespace: microsvc-pro
-  labels:
-    app: spring-boot-app
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: spring-boot-app
-  template:
-    metadata:
-      labels:
-        app: spring-boot-app
-    spec:
-      containers:
-      - name: spring-boot-app
-        image: algabrizaid/mysql-springboot-azure:latest-34
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8081
-        env:
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: spring-boot-app
+#   namespace: microsvc-pro
+#   labels:
+#     app: spring-boot-app
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: spring-boot-app
+#   template:
+#     metadata:
+#       labels:
+#         app: spring-boot-app
+#     spec:
+#       containers:
+#       - name: spring-boot-app
+#         image: algabrizaid/mysql-springboot-azure:latest-34
+#         imagePullPolicy: Always
+#         ports:
+#         - containerPort: 8081
+#         env:
 
-            - name: DB_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-cm
-                  key: hostname
-        resources:  
-          limits:
-            cpu: 500m  
-            memory: 512Mi  
-          requests:
-            cpu: 200m   
-            memory: 256Mi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: spring-boot-app-service
-  namespace: microsvc-pro
-spec:
-  type: LoadBalancer 
-  selector:
-    app: spring-boot-app
-  ports:
-  - name: http
-    port: 80
-    targetPort: 8081
-    protocol: TCP
+#             - name: DB_HOST
+#               valueFrom:
+#                 configMapKeyRef:
+#                   name: mysql-cm
+#                   key: hostname
+#         resources:  
+#           limits:
+#             cpu: 500m  
+#             memory: 512Mi  
+#           requests:
+#             cpu: 200m   
+#             memory: 256Mi
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: spring-boot-app-service
+#   namespace: microsvc-pro
+# spec:
+#   type: LoadBalancer 
+#   selector:
+#     app: spring-boot-app
+#   ports:
+#   - name: http
+#     port: 80
+#     targetPort: 8081
+#     protocol: TCP

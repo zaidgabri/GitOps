@@ -20,5 +20,14 @@ metadata:
   name: eureka
 data:
   hostname: "service-registry-app-svc"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudgateway
+  namespace: microsvc-pro
+data:
+  hostname: "config-server-app-svc"
  
 
