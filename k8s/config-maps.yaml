@@ -40,7 +40,6 @@ data:
   config_url: "http://config-server-svc"
 
 ---
-
 apiVersion: v1
 kind: ConfigMap
 metadata:
