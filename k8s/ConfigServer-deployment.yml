@@ -75,7 +75,7 @@ spec:
     spec:
       containers:
       - name: config-server-app
-        image: dailycodebuffer/configserver
+        image: algabrizaid/configserver:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 9296

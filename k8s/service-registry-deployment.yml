@@ -70,7 +70,7 @@ spec:
     spec:
       containers:
       - name: eureka
-        image: dailycodebuffer/serviceregistry
+        image: algabrizaid/serviceregistry:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8761
