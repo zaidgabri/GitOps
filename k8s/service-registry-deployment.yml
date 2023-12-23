@@ -51,5 +51,5 @@ metadata:
   name: eureka
   namespace: microsvc-pro
 data:
-  hostname: "http://service-registry-app-svc:8761"
+  hostname: "http://service-registry-app-svc:8761/eureka"
 
