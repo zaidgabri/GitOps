@@ -15,7 +15,7 @@
 #     spec:
 #       containers:
 #         - name: config-server-app
-#           image: algabrizaid/configserver:latest-15
+#           image: algabrizaid/configserver:latest-16
 #           imagePullPolicy: Always
 #           ports:
 #             - containerPort: 9296
@@ -75,7 +75,7 @@ spec:
     spec:
       containers:
       - name: config-server-app
-        image: algabrizaid/configserver:latest
+        image: algabrizaid/configserver:latest-16
         imagePullPolicy: Always
         ports:
         - containerPort: 9296
