@@ -1,26 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ConfigServer-app
+  name: config-server-app
   namespace: microsvc-pro
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ConfigServer-app
+      app: config-server-app
   template:
     metadata:
       labels:
-        app: ConfigServer-app
+        app: config-server-app
     spec:
       containers:
-        - name: ConfigServer-app
+        - name: config-server-app
           image: algabrizaid/serviceregistry:latest-1
           imagePullPolicy: Always
           ports:
             - containerPort: 9296
           env:
-
             - name: EUREKA_SERVER_ADDRESS
               valueFrom:
                 configMapKeyRef:
@@ -32,22 +31,20 @@ spec:
               memory: 512Mi  
             requests:
               cpu: 200m   
-              memory: 256Mi   
+              memory: 256Mi
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: ConfigServer-app-svc
+  name: config-server-app-svc
   namespace: microsvc-pro
 spec:
   selector:
-    app: ConfigServer-app
+    app: config-server-app
   ports:
     - protocol: TCP
       port: 80
       targetPort: 9296
-  type: NodePort 
-
-
+  type: NodePort
