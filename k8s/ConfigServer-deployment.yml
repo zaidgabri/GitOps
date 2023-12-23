@@ -39,7 +39,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ConfigServer-app-app-svc
+  name: ConfigServer-app-svc
   namespace: microsvc-pro
 spec:
   selector:
