@@ -7,14 +7,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ConfigServer-app-app
+      app: ConfigServer-app
   template:
     metadata:
       labels:
-        app: ConfigServer-app-app
+        app: ConfigServer-app
     spec:
       containers:
-        - name: ConfigServer-app-app
+        - name: ConfigServer-app
           image: algabrizaid/serviceregistry:latest-1
           imagePullPolicy: Always
           ports:
@@ -43,7 +43,7 @@ metadata:
   namespace: microsvc-pro
 spec:
   selector:
-    app: service-registry-app
+    app: ConfigServer-app
   ports:
     - protocol: TCP
       port: 80
