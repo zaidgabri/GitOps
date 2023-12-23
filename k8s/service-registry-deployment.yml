@@ -15,7 +15,7 @@
 #     spec:
 #       containers:
 #         - name: service-registry-app
-#           image: algabrizaid/serviceregistry:latest-24
+#           image: algabrizaid/serviceregistry:latest-25
 #           imagePullPolicy: Always
 #           ports:
 #             - containerPort: 8761
@@ -70,7 +70,7 @@ spec:
     spec:
       containers:
       - name: eureka
-        image: algabrizaid/serviceregistry:latest
+        image: algabrizaid/serviceregistry:latest-25
         imagePullPolicy: Always
         ports:
         - containerPort: 8761
