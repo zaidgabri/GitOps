@@ -19,7 +19,7 @@ kind: ConfigMap
 metadata:
   name: eureka
 data:
-  hostname: "service-registry-app-svc"
+  hostname: "service-registry-app-svc/eureka"
 
 ---
 apiVersion: v1
