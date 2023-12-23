@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: config-server-app
-          image: algabrizaid/configserver:latest-6
+          image: algabrizaid/configserver:latest-12
           imagePullPolicy: Always
           ports:
             - containerPort: 9296
