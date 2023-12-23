@@ -1,10 +1,8 @@
-apiVersion: apps/v1
+# apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: config-server-app
-  namespace: microsvc-pro
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: config-server-app
@@ -14,47 +12,27 @@ spec:
         app: config-server-app
     spec:
       containers:
-        - name: config-server-app
-          image: algabrizaid/configserver:latest-15
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 9296
-          env:
-            - name: EUREKA_SERVER_ADDRESS
-              valueFrom:
-                configMapKeyRef:
-                  name: eureka
-                  key: hostname
-          resources:   
-            limits:
-              cpu: 500m   
-              memory: 512Mi  
-            requests:
-              cpu: 200m   
-              memory: 256Mi
+      - name: config-server-app
+        image: dailycodebuffer/configserver
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9296
+        env:
+          - name: EUREKA_SERVER_ADDRESS
+            valueFrom:
+              configMapKeyRef:
+                name: eureka-cm
+                key: eureka_service_address
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: config-server-app-svc
-  namespace: microsvc-pro
+  name: config-server-svc
 spec:
   selector:
     app: config-server-app
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 9296
-  type: NodePort
-
-
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: cloudgateway
-  namespace: microsvc-pro
-data:
-  hostname: "config-server-app-svc"
+  - port: 80
+    targetPort: 9296
