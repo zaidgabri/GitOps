@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: service-registry-app
-          image: algabrizaid/serviceregistry:latest-21
+          image: algabrizaid/serviceregistry:latest-22
           imagePullPolicy: Always
           ports:
             - containerPort: 8761
