@@ -1,4 +1,54 @@
 # apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: cloudgateway-app
+#   namespace: microsvc-pro
+# spec:
+#   replicas: 2
+#   selector:
+#     matchLabels:
+#       app: cloudgateway-app
+#   template:
+#     metadata:
+#       labels:
+#         app: cloudgateway-app
+#     spec:
+#       containers:
+#         - name: cloudgateway-app
+#           image: algabrizaid/cloudgateway:latest-8
+#           imagePullPolicy: Always
+#           ports:
+#             - containerPort: 9090
+#           env:
+#             - name: config_server_url
+#               valueFrom:
+#                 configMapKeyRef:
+#                   name: cloudgateway
+#                   key: hostname
+#           resources:   
+#             limits:
+#               cpu: 500m   
+#               memory: 512Mi  
+#             requests:
+#               cpu: 200m   
+#               memory: 256Mi
+
+# ---
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: cloudgateway-app-svc
+#   namespace: microsvc-pro
+# spec:
+#   selector:
+#     app: cloudgateway-app
+#   ports:
+#     - protocol: TCP
+#       port: 80
+#       targetPort: 9090
+#   type: LoadBalancer
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cloud-gateway-app
