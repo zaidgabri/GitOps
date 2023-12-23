@@ -18,7 +18,14 @@ spec:
           image: algabrizaid/configserver:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8761
+            - containerPort: 9296
+          env:
+
+            - name: EUREKA_SERVER_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: eureka
+                  key: hostname
           resources:   
             limits:
               cpu: 500m   
@@ -40,5 +47,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8761
+      targetPort: 9296
   type: NodePort 
+
+

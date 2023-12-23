@@ -42,3 +42,13 @@ spec:
       port: 80
       targetPort: 8761
   type: NodePort 
+
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: eureka
+  namespace: microsvc-pro
+data:
+  hostname: "service-registry-app-svc"

@@ -13,3 +13,12 @@ metadata:
 data:
   hostname: "mysql-0.mysql"
 
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: eureka
+data:
+  hostname: "service-registry-app-svc"
+ 
+
