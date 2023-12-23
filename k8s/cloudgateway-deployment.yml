@@ -64,7 +64,7 @@ spec:
     spec:
       containers:
       - name: cloud-gateway-app
-        image: dailycodebuffer/cloudgateway
+        image: algabrizaid/cloudgateway
         imagePullPolicy: Always
         ports:
         - containerPort: 9090
