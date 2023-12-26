@@ -8,3 +8,4 @@ spec:
       storage: 256Mi
   accessModes:
     - ReadWriteOnce
+  StorageClassName: nil  # Change from &"" to nil
