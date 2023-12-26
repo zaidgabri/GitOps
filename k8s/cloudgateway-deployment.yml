@@ -46,7 +46,7 @@ spec:
     spec:
       initContainers:
       - name: init-cloud-gateway
-        image: curlimages/curl:latest 
+        image: busybox
         command: ['sh', '-c', 'until curl http://config-server-app:9296/actuator/health; do echo waiting for config-server; sleep 2; done']
       containers:
       - name: cloud-gateway-app
