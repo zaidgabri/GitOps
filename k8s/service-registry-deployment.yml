@@ -1,51 +1,51 @@
-# apiVersion: apps/v1
-# kind: StatefulSet
-# metadata:
-#   name: eureka
-# spec:
-#   replicas: 2 
-#   selector:
-#     matchLabels:
-#       app: eureka
-#   serviceName: "eureka"
-#   replicas: 1
-#   template:
-#     metadata:
-#       labels:
-#         app: eureka
-#     spec:
-#       containers:
-#       - name: eureka
-#         image: algabrizaid/serviceregistry:latest-25
-#         imagePullPolicy: Always
-#         ports:
-#         - containerPort: 8761
-
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: eureka
 spec:
-  replicas: 2
+  replicas: 2 
   selector:
     matchLabels:
       app: eureka
   serviceName: "eureka"
+  replicas: 1
   template:
     metadata:
       labels:
         app: eureka
     spec:
-      initContainers:
-      - name: init-eureka
-        image: busybox
-        command: ['sh', '-c', 'until nslookup eureka-0.eureka.default.svc.cluster.local; do echo waiting for eureka; sleep 2; done']
       containers:
       - name: eureka
         image: algabrizaid/serviceregistry:latest-25
         imagePullPolicy: Always
         ports:
         - containerPort: 8761
+
+# apiVersion: apps/v1
+# kind: StatefulSet
+# metadata:
+#   name: eureka
+# spec:
+#   replicas: 2
+#   selector:
+#     matchLabels:
+#       app: eureka
+#   serviceName: "eureka"
+#   template:
+#     metadata:
+#       labels:
+#         app: eureka
+#     spec:
+#       initContainers:
+#       - name: init-eureka
+#         image: busybox
+#         command: ['sh', '-c', 'until nslookup eureka-0.eureka.default.svc.cluster.local; do echo waiting for eureka; sleep 2; done']
+#       containers:
+#       - name: eureka
+#         image: algabrizaid/serviceregistry:latest-25
+#         imagePullPolicy: Always
+#         ports:
+#         - containerPort: 8761
 
 ---
 
