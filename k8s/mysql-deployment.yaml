@@ -31,13 +31,13 @@ spec:
 
 # ---
 
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: mysql-initdb-cm
-# data:
-#   init.sql: |
-#     CREATE DATABASE IF NOT EXISTS boa_db;  
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-initdb-cm
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS boa_db;  
 ---
 apiVersion: v1
 kind: Service
