@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: cloud-gateway-app
-        image: algabrizaid/cloudgateway:latest-15
+        image: algabrizaid/cloudgateway:latest-16
         imagePullPolicy: Always
         ports:
         - containerPort: 9090
@@ -50,7 +50,7 @@ spec:
 #       #   command: ['sh', '-c', 'until curl http://config-server-app:9296/actuator/health; do echo waiting for config-server; sleep 2; done']
 #       containers:
 #       - name: cloud-gateway-app
-#         image: algabrizaid/cloudgateway:latest-15
+#         image: algabrizaid/cloudgateway:latest-16
 #         imagePullPolicy: Always
 #         ports:
 #         - containerPort: 9090
