@@ -23,11 +23,11 @@ spec:
             value: zaid@11
           - name: MYSQL_DATABASE
             value: boa_db
-    strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 0
-      maxSurge: 1
+    # strategy:
+    # type: RollingUpdate
+    # rollingUpdate:
+    #   maxUnavailable: 0
+    #   maxSurge: 1
 
 # ---
 
