@@ -29,6 +29,9 @@ spec:
             configMapKeyRef:
               name: mysql-cm
               key: hostname
+  strategy:
+    type: Recreate
+
 
 ---
 
