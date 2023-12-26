@@ -6,6 +6,5 @@ spec:
   resources:
     requests:
       storage: 256Mi
-  storageClassName: ""  # Remove the storageClassName
   accessModes:
     - ReadWriteOnce
