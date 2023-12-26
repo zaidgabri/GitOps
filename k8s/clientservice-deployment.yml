@@ -1,9 +1,41 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: client-service-app
+# spec:
+#   replicas: 2 
+#   selector:
+#     matchLabels:
+#       app: client-service-app
+#   template:
+#     metadata:
+#       labels:
+#         app: client-service-app
+#     spec:
+#       containers:
+#       - name: client-service-app
+#         image: algabrizaid/clientservice:latest-8
+#         imagePullPolicy: Always
+#         ports:
+#         - containerPort: 8087
+#         env:
+#         - name: CONFIG_SERVER_URL
+#           valueFrom:
+#             configMapKeyRef:
+#               name: config-cm
+#               key: config_url
+#         - name: DB_HOST
+#           valueFrom:
+#             configMapKeyRef:
+#               name: mysql-cm
+#               key: hostname
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: client-service-app
 spec:
-  replicas: 2 
+  replicas: 2
   selector:
     matchLabels:
       app: client-service-app
@@ -12,6 +44,10 @@ spec:
       labels:
         app: client-service-app
     spec:
+      initContainers:
+      - name: init-client-service
+        image: busybox
+        command: ['sh', '-c', 'until curl http://cloud-gateway-app:9090/actuator/health; do echo waiting for cloud-gateway; sleep 2; done']
       containers:
       - name: client-service-app
         image: algabrizaid/clientservice:latest-8
@@ -19,16 +55,16 @@ spec:
         ports:
         - containerPort: 8087
         env:
-        - name: CONFIG_SERVER_URL
-          valueFrom:
-            configMapKeyRef:
-              name: config-cm
-              key: config_url
-        - name: DB_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: mysql-cm
-              key: hostname
+          - name: CONFIG_SERVER_URL
+            valueFrom:
+              configMapKeyRef:
+                name: config-cm
+                key: config_url
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: mysql-cm
+                key: hostname
 
 ---
 
