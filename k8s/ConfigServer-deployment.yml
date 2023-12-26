@@ -40,7 +40,7 @@ spec:
     spec:
       initContainers:
       - name: init-config-server
-       image: curlimages/curl:latest   # Use an image with curl installed
+        image: curlimages/curl:latest   # Use an image with curl installed
         command: ['sh', '-c', 'until curl http://eureka:8761/actuator/health; do echo waiting for eureka; sleep 2; done']
       containers:
       - name: config-server-app
