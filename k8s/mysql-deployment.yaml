@@ -28,7 +28,6 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           value: zaid@11
         - name: MYSQL_DATABASE
-          value: boa_db
           valueFrom:
             secretKeyRef:
               name: mssql-secret
