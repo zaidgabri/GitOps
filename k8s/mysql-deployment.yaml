@@ -11,6 +11,7 @@ spec:
     - ReadWriteOnce
 
 
+
 ---
 apiVersion: apps/v1
 kind: StatefulSet
