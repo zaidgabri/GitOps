@@ -44,10 +44,10 @@ spec:
       labels:
         app: cloud-gateway-app
     spec:
-      initContainers:
-      - name: init-cloud-gateway
-        image: curlimages/curl:latest
-        command: ['sh', '-c', 'until curl http://config-server-app:9296/actuator/health; do echo waiting for config-server; sleep 2; done']
+      # initContainers:
+      # - name: init-cloud-gateway
+      #   image: curlimages/curl:latest
+      #   command: ['sh', '-c', 'until curl http://config-server-app:9296/actuator/health; do echo waiting for config-server; sleep 2; done']
       containers:
       - name: cloud-gateway-app
         image: algabrizaid/cloudgateway:latest-14
