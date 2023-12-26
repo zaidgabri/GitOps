@@ -50,7 +50,7 @@ spec:
         command: ['sh', '-c', 'until curl http://cloud-gateway-app:9090/actuator/health; do echo waiting for cloud-gateway; sleep 2; done']
       containers:
       - name: client-service-app
-        image: algabrizaid/clientservice:latest-8
+        image: algabrizaid/clientservice:latest-9
         imagePullPolicy: Always
         ports:
         - containerPort: 8087
