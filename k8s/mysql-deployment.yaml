@@ -27,11 +27,12 @@ spec:
           value: "Y"
         - name: MYSQL_ROOT_PASSWORD
           value: zaid@11
-        - name: MYSQL_DATABASE
-          valueFrom:
-            secretKeyRef:
-              name: mssql-secret
-              key: zaid11
+        # - name: MYSQL_DATABASE
+
+          # valueFrom:
+          #   secretKeyRef:
+          #     name: mssql-secret
+          #     key: zaid11
         volumeMounts:
         - name: mssqldb
           mountPath: /var/opt/mssql
