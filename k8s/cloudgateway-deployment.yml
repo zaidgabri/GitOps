@@ -1,41 +1,9 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: cloud-gateway-app
-# spec:
-#   replicas: 2 
-#   selector:
-#     matchLabels:
-#       app: cloud-gateway-app
-#   template:
-#     metadata:
-#       labels:
-#         app: cloud-gateway-app
-#     spec:
-#       containers:
-#       - name: cloud-gateway-app
-#         image: algabrizaid/cloudgateway:latest-14
-#         imagePullPolicy: Always
-#         ports:
-#         - containerPort: 9090
-#         env:
-#           - name: CONFIG_SERVER_URL
-#             valueFrom:
-#               configMapKeyRef:
-#                 name: config-cm
-#                 key: config_url
-#           - name: EUREKA_SERVER_ADDRESS
-#             valueFrom:
-#               configMapKeyRef:
-#                 name: eureka-cm
-#                 key: eureka_service_address
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cloud-gateway-app
 spec:
-  replicas: 1
+  replicas: 2 
   selector:
     matchLabels:
       app: cloud-gateway-app
@@ -44,10 +12,6 @@ spec:
       labels:
         app: cloud-gateway-app
     spec:
-      # initContainers:
-      # - name: init-cloud-gateway
-      #   image: curlimages/curl:latest
-      #   command: ['sh', '-c', 'until curl http://config-server-app:9296/actuator/health; do echo waiting for config-server; sleep 2; done']
       containers:
       - name: cloud-gateway-app
         image: algabrizaid/cloudgateway:latest-14
@@ -65,6 +29,42 @@ spec:
               configMapKeyRef:
                 name: eureka-cm
                 key: eureka_service_address
+
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: cloud-gateway-app
+# # spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: cloud-gateway-app
+#   template:
+#     metadata:
+#       labels:
+#         app: cloud-gateway-app
+#     spec:
+#       # initContainers:
+#       # - name: init-cloud-gateway
+#       #   image: curlimages/curl:latest
+#       #   command: ['sh', '-c', 'until curl http://config-server-app:9296/actuator/health; do echo waiting for config-server; sleep 2; done']
+#       containers:
+#       - name: cloud-gateway-app
+#         image: algabrizaid/cloudgateway:latest-14
+#         imagePullPolicy: Always
+#         ports:
+#         - containerPort: 9090
+#         env:
+#           - name: CONFIG_SERVER_URL
+#             valueFrom:
+#               configMapKeyRef:
+#                 name: config-cm
+#                 key: config_url
+#           - name: EUREKA_SERVER_ADDRESS
+#             valueFrom:
+#               configMapKeyRef:
+#                 name: eureka-cm
+#                 key: eureka_service_address
 
 
 ---
