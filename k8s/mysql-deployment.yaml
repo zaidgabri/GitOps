@@ -1,47 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mssql
+  name: mysql
+  namespace: microsvc-pro
+  labels:
+    app: mysql
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mssql
-  strategy:
-    type: Recreate
+      app: mysql
   template:
     metadata:
       labels:
-        app: mssql
+        app: mysql
     spec:
-      terminationGracePeriodSeconds: 10
-      securityContext:
-        fsGroup: 1000
       containers:
-      - name: mssql
-        image: mcr.microsoft.com/mssql/rhel/server:2019-latest
+      - name: mysql
+        image: mysql:8.0
         env:
-        - name: MSSQL_PID
-          value: "Developer"
-        - name: ACCEPT_EULA
-          value: "Y"
-        - name: MYSQL_ROOT_PASSWORD
-          value: zaid@11
-        # - name: MYSQL_DATABASE
+          - name: MYSQL_ROOT_PASSWORD
+            value: zaid@11
+          - name: MYSQL_DATABASE
+            value: boa_db
+    # strategy:
+    # type: RollingUpdate
+    # rollingUpdate:
+    #   maxUnavailable: 0
+    #   maxSurge: 1
 
-          # valueFrom:
-          #   secretKeyRef:
-          #     name: mssql-secret
-          #     key: zaid11
-        volumeMounts:
-        - name: mssqldb
-          mountPath: /var/opt/mssql
-      volumes:
-      - name: mssqldb
-        persistentVolumeClaim:
-          claimName: mssql-data
-
----
+# ---
 
 apiVersion: v1
 kind: ConfigMap
@@ -49,35 +37,8 @@ metadata:
   name: mysql-initdb-cm
 data:
   init.sql: |
-    CREATE DATABASE IF NOT EXISTS boa_db;
-
-
-
+    CREATE DATABASE IF NOT EXISTS boa_db;  
 ---
-kind: StorageClass
-apiVersion:  storage.k8s.io/v1
-metadata:
-  name: azure-disk
-provisioner: kubernetes.io/azure-disk
-parameters:
-  storageaccounttype: Standard_LRS
-  kind: Managed
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: mssql-data
-  annotations:
-    volume.beta.kubernetes.io/storage-class: azure-disk
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-
----
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -90,9 +51,7 @@ spec:
     - protocol: TCP
       port: 3306
       targetPort: 3306
-
 ---
-
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -100,3 +59,10 @@ metadata:
   namespace: microsvc-pro
 data:
   hostname: mysql
+
+
+
+
+
+
+
