@@ -28,10 +28,10 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           value: zaid@11
         - name: MYSQL_DATABASE
-          # valueFrom:
-          #   secretKeyRef:
-          #     name: mssql-secret
-          #     key: zaid@11
+          valueFrom:
+            secretKeyRef:
+              name: mssql-secret
+              key: zaid11
         volumeMounts:
         - name: mssqldb
           mountPath: /var/opt/mssql
@@ -49,6 +49,31 @@ metadata:
 data:
   init.sql: |
     CREATE DATABASE IF NOT EXISTS boa_db;
+
+
+
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1beta1
+metadata:
+  name: azure-disk
+provisioner: kubernetes.io/azure-disk
+parameters:
+  storageaccounttype: Standard_LRS
+  kind: Managed
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mssql-data
+  annotations:
+    volume.beta.kubernetes.io/storage-class: azure-disk
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 
 ---
 
