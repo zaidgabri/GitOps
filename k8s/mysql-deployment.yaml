@@ -1,35 +1,71 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: mysql
+#   namespace: microsvc-pro
+#   labels:
+#     app: mysql
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: mysql
+#   template:
+#     metadata:
+#       labels:
+#         app: mysql
+#     spec:
+#       containers:
+#       - name: mysql
+#         image: mysql:8.0
+#         env:
+#           - name: MYSQL_ROOT_PASSWORD
+#             value: zaid@11
+#           - name: MYSQL_DATABASE
+#             value: boa_db
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
-  namespace: microsvc-pro
-  labels:
-    app: mysql
+  name: mssql
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mysql
+      app: mssql
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
-        app: mysql
+        app: mssql
     spec:
+      terminationGracePeriodSeconds: 10
+      securityContext:
+        fsGroup: 1000
       containers:
-      - name: mysql
-        image: mysql:8.0
+      - name: mssql
+        image: mcr.microsoft.com/mssql/rhel/server:2019-latest
         env:
-          - name: MYSQL_ROOT_PASSWORD
-            value: zaid@11
-          - name: MYSQL_DATABASE
+        - name: MSSQL_PID
+          value: "Developer"
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: MYSQL_ROOT_PASSWORD
+          value: zaid@11
+        - name: MYSQL_DATABASE
             value: boa_db
-    # strategy:
-    # type: RollingUpdate
-    # rollingUpdate:
-    #   maxUnavailable: 0
-    #   maxSurge: 1
+          valueFrom:
+            secretKeyRef:
+              name: mssql-secret
+              key:  zaid@11
+        volumeMounts:
+        - name: mssqldb
+          mountPath: /var/opt/mssql
+      volumes:
+      - name: mssqldb
+        persistentVolumeClaim:
+          claimName: mssql-data
 
-# ---
 
 apiVersion: v1
 kind: ConfigMap
@@ -66,155 +102,3 @@ data:
 
 
 
-
-
-
-
-
-
-
-# apiVersion: v1
-# kind: PersistentVolume
-# metadata:
-#   name: mysql-pv
-# spec:
-#   capacity:
-#     storage: 1Gi
-#   accessModes:
-#     - ReadWriteOnce
-#   storageClassName: manual
-#   hostPath:
-# #    path: "/mnt/data"  # - for Unix/Linux
-#      path: "/run/desktop/mnt/host/c/temp/testfiles"
-#      type: DirectoryOrCreate
-# ---
-
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: mysql-pvc
-# spec:
-#   resources:
-#     requests:
-#       storage: 1Gi
-#   storageClassName: manual
-#   accessModes:
-#     - ReadWriteOnce
-
-
-# ---
-# apiVersion: apps/v1
-# kind: StatefulSet
-# metadata:
-#   name: mysql
-# spec:
-#   selector:
-#     matchLabels:
-#       app: mysql
-#   serviceName: mysql
-#   replicas: 1
-#   template:
-#     metadata:
-#       labels:
-#         app: mysql
-#     spec:
-#       containers:
-#       - name: mysql
-#         image: mysql:8.0
-#         env:
-#         - name: MYSQL_ROOT_PASSWORD
-#           value: zaid@11        
-#         ports:
-#         - containerPort: 3306
-#           name: mysql
-#         volumeMounts:
-#         - name: mysql-initdb
-#           mountPath: /docker-entrypoint-initdb.d
-#         - name: mysql-persistent-storage
-#           mountPath: /var/lib/mysql
-#       volumes:
-#         - name: mysql-initdb
-#           configMap:
-#             name: mysql-initdb-cm
-#         - name: mysql-persistent-storage
-#           persistentVolumeClaim:
-#             claimName: mysql-pvc
-
-# ---
-
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: mysql-initdb-cm
-# data:
-#   init.sql: |
-#     CREATE DATABASE IF NOT EXISTS boa_db;
-
-
-
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: mysql
-# spec:
-#   clusterIP: None
-#   selector:
-#     app: mysql
-#   ports:
-#   - port: 3306
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: mysql
-  namespace: microsvc-pro
-  labels:
-    app: mysql
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: mysql
-  template:
-    metadata:
-      labels:
-        app: mysql
-    spec:
-      containers:
-      - name: mysql
-        image: mysql:8.0
-        env:
-          - name: MYSQL_ROOT_PASSWORD
-            value: zaid@11
-          - name: MYSQL_DATABASE
-            value: boa_db
-    strategy:
-      type: RollingUpdate
-      rollingUpdate:
-        maxUnavailable: 0
-        maxSurge: 1
-
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql
-  namespace: microsvc-pro
-spec:
-  selector:
-    app: mysql
-  ports:
-    - protocol: TCP
-      port: 3306
-      targetPort: 3306
-
----
-
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mysql-cm
-  namespace: microsvc-pro
-data:
-  hostname: mysql
