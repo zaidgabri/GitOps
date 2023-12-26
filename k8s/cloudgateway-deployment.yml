@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: cloud-gateway-app
 spec:
-  replicas: 2 
+  replicas: 1
   selector:
     matchLabels:
       app: cloud-gateway-app
