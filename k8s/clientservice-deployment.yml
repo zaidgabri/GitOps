@@ -30,7 +30,10 @@ spec:
               name: mysql-cm
               key: hostname
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
 
 
 ---
