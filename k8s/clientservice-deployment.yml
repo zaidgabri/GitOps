@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: client-service-app
 spec:
-  replicas: 1 
+  replicas: 1
   selector:
     matchLabels:
       app: client-service-app
@@ -18,20 +18,20 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8087
-       env:
-          - name: CONFIG_SERVER_URL
-            valueFrom:
-              configMapKeyRef:
-                name: config-cm
-                key: config_url
-          - name: EUREKA_SERVER_ADDRESS
-            valueFrom:
-              configMapKeyRef:
-                name: eureka-cm
-                key: eureka_service_address
-          - name: DB_HOST
-            valueFrom:
-             configMapKeyRef:
+        env:
+        - name: CONFIG_SERVER_URL
+          valueFrom:
+            configMapKeyRef:
+              name: config-cm
+              key: config_url
+        - name: EUREKA_SERVER_ADDRESS
+          valueFrom:
+            configMapKeyRef:
+              name: eureka-cm
+              key: eureka_service_address
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
               name: mysql-cm
               key: hostname
   strategy:
@@ -39,7 +39,6 @@ spec:
     rollingUpdate:
       maxUnavailable: 0
       maxSurge: 1
-
 
 ---
 
