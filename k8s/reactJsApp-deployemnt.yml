@@ -27,11 +27,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: reactJs-svc
+  name: reactjs-svc
 spec:
   type: LoadBalancer
   selector:
     app: reactJs-app
   ports:
-  - port: 80
+  - port: 90
     targetPort: 5000
