@@ -13,7 +13,7 @@ spec:
         app: reactjs-app
     spec:
       containers:
-      - name: reactJs-app
+      - name: reactjs-app
         image: algabrizaid/reactapp:latest-21
         imagePullPolicy: Always
         ports:
