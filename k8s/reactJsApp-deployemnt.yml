@@ -14,10 +14,11 @@ spec:
     spec:
       containers:
       - name: reactJs-app
-        image: algabrizaid/reactapp
+        image: algabrizaid/reactapp:latest-21
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
+
 apiVersion: v1
 kind: Service
 metadata:
