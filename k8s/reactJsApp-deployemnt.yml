@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: reactJs-app
-        image: algabrizaid/reactapp:null
+        image: algabrizaid/reactapp
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
