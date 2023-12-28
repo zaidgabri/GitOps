@@ -6,6 +6,6 @@ spec:
   resources:
     requests:
       storage: 256Mi
-  storageClassName: manual
+  storageClassName: disk.csi.azure.com  # Use an appropriate storage class
   accessModes:
     - ReadWriteOnce
