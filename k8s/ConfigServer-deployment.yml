@@ -19,7 +19,7 @@ spec:
         command: ['sh', '-c', 'until curl http://eureka-0.eureka:8761/eureka; do echo waiting for eureka; sleep 2; done']
       containers:
       - name: config-server-app
-        image: algabrizaid/configserver:latest-16
+        image: algabrizaid/configserver:latest-15
         imagePullPolicy: Always
         ports:
         - containerPort: 9296
