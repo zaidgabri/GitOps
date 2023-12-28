@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: mysql-cm
 data:
-  hostname: "http://10.0.54.185"
+  hostname: "http://10.0.232.254"
 
 
 ---
