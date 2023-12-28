@@ -4,21 +4,7 @@ metadata:
   name: manual
 provisioner: kubernetes.io/no-provisioner
 volumeBindingMode: WaitForFirstConsumer
-
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-pvc
-spec:
-  resources:
-    requests:
-      storage: 256Mi
-  storageClassName: manual
-  accessModes:
-    - ReadWriteOnce
----
-
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -31,6 +17,20 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/var/lib/mysql"  
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  resources:
+    requests:
+      storage: 256Mi
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+
+
 
 ---
 apiVersion: apps/v1
@@ -71,7 +71,6 @@ spec:
             claimName: mysql-pvc
 
 ---
-
 apiVersion: v1
 kind: ConfigMap
 metadata:
