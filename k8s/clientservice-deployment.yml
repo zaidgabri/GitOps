@@ -34,7 +34,11 @@ spec:
               configMapKeyRef:
                 name: mysql-cm
                 key: hostname
-
+  # strategy:
+  #   type: RollingUpdate
+  #   rollingUpdate:
+  #     maxUnavailable: 0
+  #     maxSurge: 1
 
 ---
 
