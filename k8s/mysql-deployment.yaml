@@ -1,67 +1,59 @@
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: mysql
-spec:
-  serviceName: mysql
-  replicas: 1
-  selector:
-    matchLabels:
-      app: mysql
-  template:
-    metadata:
-      labels:
-        app: mysql
-    spec:
-      containers:
-        - name: mysql
-          image: mysql:8.0
-          env:
-            - name: MYSQL_ROOT_PASSWORD
-              value: zaid@11
-            - name: MYSQL_DATABASE
-              value: boa_db
-            # - name: MYSQL_USER
-            #   value: root
-            # - name: MYSQL_PASSWORD
-            #   value: zaid@11
-            # - name: MYSQL_INITDB_SKIP_TZINFO
-            #   value: "1"
-            # - name: MYSQL_ALLOW_EMPTY_PASSWORD
-            #   value: "yes"
-            # - name: MYSQL_USER
-            #   value: user
-            # - name: MYSQL_PASSWORD
-            #   value: password
-            - name: MYSQL_ROOT_HOST
-              value: "%"
-            - name: MYSQL_TCP_KEEPALIVE
-              value: "120"
-            - name: MYSQL_QUERY_CACHE_SIZE
-              value: "0"
-          ports:
-            - containerPort: 3306
-              name: mysql
-          volumeMounts:
-            - name: mysql-initdb
-              mountPath: /docker-entrypoint-initdb.d
-            - name: mysql-persistent-storage
-              mountPath: /var/lib/mysql
-      volumes:
-        - name: mysql-initdb
-          configMap:
-            name: mysql-initdb-cm
-        - name: mysql-persistent-storage
-          persistentVolumeClaim:
-            claimName: mysql-pvc
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql
-spec:
-  clusterIP: None
-  selector:
-    app: mysql
-  ports:
-    - port: 3306
+# apiVersion: apps/v1
+# kind: StatefulSet
+# metadata:
+#   name: mysql
+# spec:
+#   serviceName: mysql
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: mysql
+#   template:
+#     metadata:
+#       labels:
+#         app: mysql
+#     spec:
+#       containers:
+#         - name: mysql
+#           image: mysql:8.0
+#           env:
+#             - name: MYSQL_ROOT_PASSWORD
+#               value: zaid@11
+#           ports:
+#             - containerPort: 3306
+#               name: mysql
+#           volumeMounts:
+#             - name: mysql-initdb
+#               mountPath: /docker-entrypoint-initdb.d
+#             - name: mysql-persistent-storage
+#               mountPath: /var/lib/mysql
+#       volumes:
+#         - name: mysql-initdb
+#           configMap:
+#             name: mysql-initdb-cm
+#         - name: mysql-persistent-storage
+#           persistentVolumeClaim:
+#             claimName: mysql-pvc
+
+# ---
+
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: mysql-initdb-cm
+# data:
+#   init.sql: |
+#     CREATE DATABASE IF NOT EXISTS boa_db;
+
+# ---
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: mysql
+# spec:
+#   clusterIP: None
+#   selector:
+#     app: mysql
+#   ports:
+#     - port: 3306
