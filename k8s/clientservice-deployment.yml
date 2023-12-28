@@ -1,54 +1,50 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: client-service-app
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: client-service-app
-#   template:
-#     metadata:
-#       labels:
-#         app: client-service-app
-#     spec:
-#       containers:
-#       - name: client-service-app
-#         image: algabrizaid/clientservice:latest-12
-#         imagePullPolicy: Always
-#         ports:
-#         - containerPort: 8087
-#         env:
-#           - name: CONFIG_SERVER_URL
-#             valueFrom:
-#               configMapKeyRef:
-#                 name: config-cm
-#                 key: config_url
-#           - name: EUREKA_SERVER_ADDRESS
-#             valueFrom:
-#               configMapKeyRef:
-#                 name: eureka-cm
-#                 key: eureka_service_address
-#           - name: DB_HOST
-#             valueFrom:
-#               configMapKeyRef:
-#                 name: mysql-cm
-#                 key: hostname
-#   # strategy:
-#   #   type: RollingUpdate
-#   #   rollingUpdate:
-#   #     maxUnavailable: 0
-#   #     maxSurge: 1
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-service-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-service-app
+  template:
+    metadata:
+      labels:
+        app: client-service-app
+    spec:
+      containers:
+      - name: client-service-app
+        image: algabrizaid/clientservice:latest-12
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8087
+        env:
+          - name: CONFIG_SERVER_URL
+            valueFrom:
+              configMapKeyRef:
+                name: config-cm
+                key: config_url
+          - name: EUREKA_SERVER_ADDRESS
+            valueFrom:
+              configMapKeyRef:
+                name: eureka-cm
+                key: eureka_service_address
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: mysql-cm
+                key: hostname
 
-# ---
 
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: client-service-svc
-# spec:
-#   selector:
-#     app: client-service-app
-#   ports:
-#   - port: 80
-#     targetPort: 8087
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-service-svc
+spec:
+  selector:
+    app: client-service-app
+  ports:
+  - port: 80
+    targetPort: 8087

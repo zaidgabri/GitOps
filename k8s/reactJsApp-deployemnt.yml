@@ -1,37 +1,37 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: reactjs-app
-spec:
-  replicas: 1  # Initial number of replicas
-  selector:
-    matchLabels:
-      app: reactjs-app
-  template:
-    metadata:
-      labels:
-        app: reactjs-app
-    spec:
-      containers:
-      - name: reactjs-app
-        image: algabrizaid/reactapp:latest-22
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 3000
-        resources:
-          requests:
-            memory: "512Mi"  # Adjust based on your application's requirements
-          limits:
-            memory: "1Gi"    # Adjust based on your application's requirements
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: reactjs-svc
-spec:
-  type: LoadBalancer
-  selector:
-    app: reactjs-app
-  ports:
-  - port: 3000  
-    targetPort: 3000
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: reactjs-app
+# spec:
+#   replicas: 1  # Initial number of replicas
+#   selector:
+#     matchLabels:
+#       app: reactjs-app
+#   template:
+#     metadata:
+#       labels:
+#         app: reactjs-app
+#     spec:
+#       containers:
+#       - name: reactjs-app
+#         image: algabrizaid/reactapp:latest-22
+#         imagePullPolicy: Always
+#         ports:
+#         - containerPort: 3000
+#         resources:
+#           requests:
+#             memory: "512Mi"  # Adjust based on your application's requirements
+#           limits:
+#             memory: "1Gi"    # Adjust based on your application's requirements
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: reactjs-svc
+# spec:
+#   type: LoadBalancer
+#   selector:
+#     app: reactjs-app
+#   ports:
+#   - port: 3000  
+#     targetPort: 3000
