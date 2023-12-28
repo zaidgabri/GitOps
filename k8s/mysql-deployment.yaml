@@ -85,10 +85,10 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql
+  name: mysql-svc
 spec:
-  clusterIP: None
   selector:
     app: mysql
   ports:
     - port: 3306
+
