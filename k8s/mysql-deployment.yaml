@@ -85,7 +85,7 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql
+  name: mysql-cm
 spec:
   clusterIP: None
   selector:
