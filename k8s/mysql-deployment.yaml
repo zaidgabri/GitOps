@@ -21,18 +21,18 @@ spec:
               value: zaid@11
             - name: MYSQL_DATABASE
               value: boa_db
-            - name: MYSQL_USER
-              value: user
-            - name: MYSQL_PASSWORD
-              value: password
-            - name: MYSQL_INITDB_SKIP_TZINFO
-              value: "1"
-            - name: MYSQL_ALLOW_EMPTY_PASSWORD
-              value: "yes"
-            - name: MYSQL_USER
-              value: user
-            - name: MYSQL_PASSWORD
-              value: password
+            # - name: MYSQL_USER
+            #   value: root
+            # - name: MYSQL_PASSWORD
+            #   value: zaid@11
+            # - name: MYSQL_INITDB_SKIP_TZINFO
+            #   value: "1"
+            # - name: MYSQL_ALLOW_EMPTY_PASSWORD
+            #   value: "yes"
+            # - name: MYSQL_USER
+            #   value: user
+            # - name: MYSQL_PASSWORD
+            #   value: password
             - name: MYSQL_ROOT_HOST
               value: "%"
             - name: MYSQL_TCP_KEEPALIVE
