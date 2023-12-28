@@ -10,7 +10,20 @@ spec:
   storageClassName: manual
   accessModes:
     - ReadWriteOnce
+---
 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 256Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/var/lib/mysql"  
 
 ---
 apiVersion: apps/v1
