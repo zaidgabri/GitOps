@@ -17,7 +17,7 @@ spec:
         image: algabrizaid/reactapp:latest-22
         imagePullPolicy: Always
         ports:
-        - containerPort: 9090
+        - containerPort: 3000
         env:
           - name: CONFIG_SERVER_URL
             valueFrom:
@@ -44,5 +44,5 @@ spec:
   selector:
     app: cloud-gateway-app
   ports:
-  - port: 80
-    targetPort: 9090
+  - port: 3000  
+    targetPort: 3000
