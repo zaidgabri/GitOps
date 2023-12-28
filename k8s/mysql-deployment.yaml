@@ -19,6 +19,26 @@ spec:
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: zaid@11
+            - name: MYSQL_DATABASE
+              value: boa_db
+            - name: MYSQL_USER
+              value: user
+            - name: MYSQL_PASSWORD
+              value: password
+            - name: MYSQL_INITDB_SKIP_TZINFO
+              value: "1"
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: "yes"
+            - name: MYSQL_USER
+              value: user
+            - name: MYSQL_PASSWORD
+              value: password
+            - name: MYSQL_ROOT_HOST
+              value: "%"
+            - name: MYSQL_TCP_KEEPALIVE
+              value: "120"
+            - name: MYSQL_QUERY_CACHE_SIZE
+              value: "0"
           ports:
             - containerPort: 3306
               name: mysql
@@ -34,19 +54,7 @@ spec:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
             claimName: mysql-pvc
-
 ---
-
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mysql-initdb-cm
-data:
-  init.sql: |
-    CREATE DATABASE IF NOT EXISTS boa_db;
-
----
-
 apiVersion: v1
 kind: Service
 metadata:

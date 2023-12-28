@@ -21,5 +21,15 @@ metadata:
   name: eureka-cm
 data:
   eureka_service_address: "http://eureka-0.eureka:8761/eureka"
+
+
+  apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-initdb-cm
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS boa_db;
+
  
 
