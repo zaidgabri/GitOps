@@ -15,7 +15,7 @@ spec:
       containers:
       - name: notifications-service-app
         image: algabrizaid/notificationsservice:latest-1
-        imagePullPolicy: Always
+        # imagePullPolicy: Always
         ports:
         - containerPort: 8088
         env:
