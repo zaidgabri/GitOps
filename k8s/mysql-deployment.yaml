@@ -29,7 +29,7 @@ spec:
       image: mysql:8.0.23
       env:
       - name: MYSQL_ROOT_PASSWORD
-        value: zaid@11  # Corrected indentation
+        value: zaid@11
       ports:
       - containerPort: 3306
       volumeMounts:
@@ -50,5 +50,5 @@ spec:
   selector:
     app: mysql
   ports:
-    port: 3306
+  - port: 3306
     targetPort: 3306
