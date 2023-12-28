@@ -7,7 +7,7 @@ spec:
    - ReadWriteOnce
   resources:
    requests:
-    storage: 1Gi
+    storage: 256Mi
 
 ---
 apiVersion: apps/v1
@@ -39,6 +39,15 @@ spec:
     - name: mysql-persistent-storage
       persistentVolumeClaim:
         claimName: mysql-pvc
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-initdb-cm
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS boa_db;
 
 ---
 apiVersion: v1
