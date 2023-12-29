@@ -63,7 +63,7 @@ spec:
     targetPort: 3306
 
 ---
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: mysql-pod-status-checker
