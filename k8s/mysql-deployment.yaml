@@ -75,7 +75,7 @@ spec:
         spec:
           containers:
           - name: pod-status-checker
-            image: your-image
+            image: mysql:8.0.23
             command: ["/bin/sh"]
             args: ["-c", "if kubectl get pods -l app=mysql | grep -q 'Running'; then echo 'Pod is running'; else kubectl delete pod -l app=mysql; fi"]
           restartPolicy: Never
