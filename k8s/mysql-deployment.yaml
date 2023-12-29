@@ -62,20 +62,20 @@ spec:
   - port: 3306
     targetPort: 3306
 
----
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  name: mysql-pod-status-checker
-spec:
-  schedule: "*/5 * * * *"  # Run every 5 minutes (adjust as needed)
-  jobTemplate:
-    spec:
-      template:
-        spec:
-          containers:
-          - name: pod-status-checker
-            image: mysql:8.0.23
-            command: ["/bin/sh"]
-            args: ["-c", "if kubectl get pods -l app=mysql | grep -q 'Running'; then echo 'Pod is running'; else kubectl delete pod -l app=mysql; fi"]
-          restartPolicy: Never
+# ---
+# apiVersion: batch/v1
+# kind: CronJob
+# metadata:
+#   name: mysql-pod-status-checker
+# spec:
+#   schedule: "*/5 * * * *"  # Run every 5 minutes (adjust as needed)
+#   jobTemplate:
+#     spec:
+#       template:
+#         spec:
+#           containers:
+#           - name: pod-status-checker
+#             image: mysql:8.0.23
+#             command: ["/bin/sh"]
+#             args: ["-c", "if kubectl get pods -l app=mysql | grep -q 'Running'; then echo 'Pod is running'; else kubectl delete pod -l app=mysql; fi"]
+#           restartPolicy: Never
