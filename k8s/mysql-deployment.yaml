@@ -4,10 +4,10 @@ metadata:
   name: mysql-pvc
 spec:
   accessModes:
-   - ReadWriteOnce
+  - ReadWriteOnce
   resources:
-   requests:
-    storage: 256Mi
+    requests:
+      storage: 256Mi
 
 ---
 apiVersion: apps/v1
@@ -17,28 +17,28 @@ metadata:
 spec:
   replicas: 1
   selector:
-   matchLabels:
-     app: mysql
-  template:
-   metadata:
-     labels:
+    matchLabels:
       app: mysql
-   spec:
-    containers:
-    - name: mysql
-      image: mysql:8.0.23
-      env:
-      - name: MYSQL_ROOT_PASSWORD
-        value: zaid@11
-      ports:
-      - containerPort: 3306
-      volumeMounts:
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0.23
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: zaid@11
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
       - name: mysql-persistent-storage
-        mountPath: /var/lib/mysql
-    volumes:
-    - name: mysql-persistent-storage
-      persistentVolumeClaim:
-        claimName: mysql-pvc
+        persistentVolumeClaim:
+          claimName: mysql-pvc
 
 ---
 apiVersion: v1
@@ -61,3 +61,21 @@ spec:
   ports:
   - port: 3306
     targetPort: 3306
+
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: mysql-pod-status-checker
+spec:
+  schedule: "*/5 * * * *"  # Run every 5 minutes (adjust as needed)
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: pod-status-checker
+            image: your-image
+            command: ["/bin/sh"]
+            args: ["-c", "if kubectl get pods -l app=mysql | grep -q 'Running'; then echo 'Pod is running'; else kubectl delete pod -l app=mysql; fi"]
+          restartPolicy: Never
