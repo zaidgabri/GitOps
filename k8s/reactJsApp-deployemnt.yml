@@ -3,7 +3,7 @@
 # metadata:
 #   name: reactjs-app
 # spec:
-#   replicas: 1  # Initial number of replicas
+#   replicas: 1
 #   selector:
 #     matchLabels:
 #       app: reactjs-app
@@ -14,15 +14,20 @@
 #     spec:
 #       containers:
 #       - name: reactjs-app
-#         image: algabrizaid/reactapp:latest-22
-#         imagePullPolicy: Always
+#         image: algabrizaid/reactapp:latest-26
 #         ports:
 #         - containerPort: 3000
 #         resources:
 #           requests:
-#             memory: "512Mi"  # Adjust based on your application's requirements
+#             memory: "300Mi"
 #           limits:
-#             memory: "1Gi"    # Adjust based on your application's requirements
+#             memory: "400Mi"
+#         readinessProbe:
+#           httpGet:
+#             path: /
+#             port: 3000
+#           initialDelaySeconds: 30
+#           periodSeconds: 5
 # ---
 # apiVersion: v1
 # kind: Service
