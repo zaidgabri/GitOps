@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: client-service-app
-        image: algabrizaid/clientservice:latest-23
+        image: algabrizaid/clientservice:latest-24
         # imagePullPolicy: Always
         ports:
         - containerPort: 8087
