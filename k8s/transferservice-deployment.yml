@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: transfer-service-app
-        image: algabrizaid/transferservice:latest-3
+        image: algabrizaid/transferservice:latest-4
         # imagePullPolicy: Always
         ports:
         - containerPort: 8082
