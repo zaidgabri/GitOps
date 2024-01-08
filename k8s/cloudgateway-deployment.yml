@@ -40,7 +40,7 @@ kind: Service
 metadata:
   name: cloud-gateway-svc
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: cloud-gateway-app
   ports:
