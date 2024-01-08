@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: cloud-gateway-app
-        image: algabrizaid/cloudgateway:latest-3
+        image: algabrizaid/cloudgateway:latest-1
         imagePullPolicy: Always
         ports:
         - containerPort: 9090
@@ -40,7 +40,7 @@ kind: Service
 metadata:
   name: cloud-gateway-svc
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: cloud-gateway-app
   ports:
