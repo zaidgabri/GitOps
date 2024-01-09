@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: cloud-gateway-app
-        image: algabrizaid/cloudgateway:latest-6
+        image: algabrizaid/cloudgateway:latest-7
         imagePullPolicy: Always
         ports:
         - containerPort: 9090
