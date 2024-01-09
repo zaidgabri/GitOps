@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: dentity-provider-service-app
-        image: algabrizaid/dentityprovider:latest
+        image: algabrizaid/identityprovider:latest
         # imagePullPolicy: Always
         ports:
         - containerPort: 8083
